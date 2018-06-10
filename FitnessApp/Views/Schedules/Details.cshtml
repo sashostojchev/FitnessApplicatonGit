@@ -1,0 +1,27 @@
+﻿@model ScheduleTypeTrainer
+    @using FitnessApp.Repository
+@using FitnessApp.ViewModels
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int trainingId = Model.TrainingTypes.Where(t => t.Id == Model.Schedule.TrainingTypeId).Select(x => x.Id).Single();
+    string day = TrainerRepo.DaysOfWeek.Where(d => d.Id == Model.Schedule.DayOfWeekId).Select(x => x.Day).Single();
+    string start = TrainerRepo.Hours.Where(s => s.Id == Model.Schedule.StartTimeId).Select(x => x.Hour).Single();
+    string end = TrainerRepo.Hours.Where(e => e.Id == Model.Schedule.EndTimeId).Select(x => x.Hour).Single();
+}
+<h2>@day: @start - @end</h2>
+
+<table class="table-sm">
+    <tbody>
+        <tr>
+            <td>Training Type:</td>
+            <td>@Model.TrainingTypes.Where(t => t.Id == Model.Schedule.TrainingTypeId).Select(x => x.Name).Single()</td>
+        </tr>
+        <tr>
+            <td>Trainer:</td>
+            <td>@Model.Trainers.Where(t => t.Id == trainingId).Select(x => x.FullName).Single()</td>
+        </tr>
+    </tbody>
+</table>
+<br />
+<p>@Html.ActionLink("Back to List", "ListAll")</p>

@@ -1,0 +1,53 @@
+﻿@model FitnessApp.ViewModels.CreateScheduleViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Schedule</h2>
+
+@using (Html.BeginForm("Edit", "Schedules", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>
+        <div class="form-group">
+            <div class="align-content-lg-start my-lg-2">
+                <div class="w-25">
+                    @Html.LabelFor(m => m.Schedule.TrainingTypeId)
+                    @Html.DropDownListFor(m => m.Schedule.TrainingTypeId, new SelectList(Model.TrainingTypes, "Id", "Name"), "Select training type", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Schedule.TrainingTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="align-content-lg-start my-lg-2">
+                <div class="w-25">
+                    @Html.LabelFor(m => m.Schedule.DayOfWeekId)
+                    @Html.DropDownListFor(m => m.Schedule.DayOfWeekId, new SelectList(Model.DaysOfWeek, "Id", "Day"), "Select day of week", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Schedule.DayOfWeekId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="align-content-lg-start my-lg-2">
+                <div class="w-25">
+                    @Html.LabelFor(m => m.Schedule.StartTimeId)
+                    @Html.DropDownListFor(m => m.Schedule.StartTimeId, new SelectList(Model.Hours, "Id", "Hour"), "Select start time", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Schedule.StartTimeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="align-content-lg-start my-lg-2">
+                <div class="w-25">
+                    @Html.LabelFor(m => m.Schedule.EndTimeId)
+                    @Html.DropDownListFor(m => m.Schedule.EndTimeId, new SelectList(Model.Hours, "Id", "Hour"), "Select end time", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Schedule.EndTimeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <br />
+        <input type="hidden" name="Schedule.Id" value="@Model.Schedule.Id" />
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+}
+
